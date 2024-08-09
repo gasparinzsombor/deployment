@@ -168,7 +168,7 @@ defmodule Desktop.Deployment.Tooling do
 
     Package.MacOS.find_deps(object)
     |> Enum.filter(fn lib ->
-      (String.starts_with?(lib, "/usr/local/opt/") or String.starts_with?(lib, "/Users/")) and
+      (String.starts_with?(lib, "/usr/local/opt/") or String.starts_with?(lib, "/Users/")) or String.starts_with?(lib, "/usr/local/Cellar/") and
         not String.starts_with?(lib, cwd)
     end)
   end
