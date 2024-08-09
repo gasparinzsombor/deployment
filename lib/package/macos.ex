@@ -283,7 +283,9 @@ defmodule Desktop.Deployment.Package.MacOS do
   end
 
   defp should_rewrite?(bin, dep) do
-    String.starts_with?(dep, "/usr/local/opt/") or String.starts_with?(dep, "/Users/") or
+    String.starts_with?(dep, "/usr/local/opt/") or
+      String.starts_with?(dep, "/usr/local/Cellar/") or
+      String.starts_with?(dep, "/Users/") or
       (String.starts_with?(dep, "@executable_path") and
          not File.exists?(
            Path.join(
