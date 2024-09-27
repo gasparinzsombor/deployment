@@ -280,6 +280,7 @@ defmodule Desktop.Deployment.Package.MacOS do
       end
     end)
     |> Enum.filter(&is_binary/1)
+    |> Enum.reject(&String.contains?(&1, "runner/work"))
   end
 
   defp should_rewrite?(bin, dep) do
