@@ -57,7 +57,7 @@ defmodule Desktop.Deployment.Package.MacOS do
     # Creating/copying the icon
     icon_path = Path.join(mac_tools, "icons.icns")
 
-    if not File.exists?(pkg.icon) do
+    if File.exists?(pkg.icon) do
       iconset = Path.join(build_root, "icons.iconset")
       File.mkdir_p!(iconset)
 
