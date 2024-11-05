@@ -215,6 +215,9 @@ defmodule Desktop.Deployment.Package do
 
     File.rm(out_file)
 
+
+    File.cp!(pkg.icon, Path.join(rel_path, Path.basename(pkg.icon)))
+
     content = eval_eex(Path.join(linux_tools, "install.eex"), rel, pkg)
     File.write!(Path.join(rel_path, "install"), content)
     File.chmod!(Path.join(rel_path, "install"), 0o755)
