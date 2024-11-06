@@ -439,7 +439,7 @@ defmodule Desktop.Deployment.Package.MacOS do
   end
 
   def notarize(
-        %Package{identifier: identifier},
+        %Package{identifier: _identifier},
         %NtzCreds{username: username, password: password, team_uid: team_uid},
         file
       )
