@@ -98,8 +98,8 @@ defmodule Desktop.Deployment.Tooling do
     File.cp!(src, dst)
   end
 
-  def eval_eex(filename, rel, pkg) do
-    EEx.eval_file(filename, assigns: [release: rel, package: pkg])
+  def eval_eex(filename, rel, pkg, extras \\ []) do
+    EEx.eval_file(filename, assigns: [release: rel, package: pkg] ++ extras)
   end
 
   def file_md5(name) do
