@@ -52,7 +52,7 @@ libGLX.so.0
 # part of OpenGL like libGL/libEGL, so excluding it should not cause any problems
 # https://github.com/linuxdeploy/linuxdeploy/issues/152
 
-libdrm.so.2
+# libdrm.so.2
 # Workaround for:
 # Antergos Linux release 2015.11 (ISO-Rolling)
 # /usr/lib/libdrm_amdgpu.so.1: error: symbol lookup error: undefined symbol: drmGetNodeTypeFromFd (fatal)
@@ -60,11 +60,11 @@ libdrm.so.2
 # libGL error: failed to load driver: swrast
 # Unrecognized OpenGL version
 
-libglapi.so.0
+# libglapi.so.0
 # Part of mesa
 # known to cause problems with graphics, see https://github.com/RPCS3/rpcs3/issues/4427#issuecomment-381674910
 
-libgbm.so.1
+# libgbm.so.1
 # Part of mesa
 # https://github.com/probonopd/linuxdeployqt/issues/390#issuecomment-529036305
 
