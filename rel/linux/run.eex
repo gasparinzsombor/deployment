@@ -10,7 +10,7 @@ fi
 <% else %>
 export RELEASE_ROOT=`pwd -P`
 if [ -z "$1" ]; then
-    set -- daemon "$@"
+    set -- start "$@"
 fi
 <% end %>
 
