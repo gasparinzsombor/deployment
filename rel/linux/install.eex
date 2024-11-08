@@ -35,5 +35,4 @@ mkdir -p $HOME/.local/share/applications/
 cp $INSTALL_DIR/$APP_NAME.desktop $HOME/.local/share/applications/
 mkdir -p $HOME/.config/autostart/
 cp $INSTALL_DIR/$APP_NAME.desktop $HOME/.config/autostart/
-$INSTALL_DIR/$APP_NAME
 exit 0;
