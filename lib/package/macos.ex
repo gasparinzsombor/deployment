@@ -57,7 +57,7 @@ defmodule Desktop.Deployment.Package.MacOS do
     # Creating/copying the icon
     icon_path = Path.join(mac_tools, "icons.icns")
 
-    if not File.exists?(icon_path) do
+    if File.exists?(pkg.icon) do
       iconset = Path.join(build_root, "icons.iconset")
       File.mkdir_p!(iconset)
 
@@ -280,10 +280,13 @@ defmodule Desktop.Deployment.Package.MacOS do
       end
     end)
     |> Enum.filter(&is_binary/1)
+    |> Enum.reject(&String.contains?(&1, "runner/work"))
   end
 
   defp should_rewrite?(bin, dep) do
-    String.starts_with?(dep, "/usr/local/opt/") or String.starts_with?(dep, "/Users/") or
+    String.starts_with?(dep, "/usr/local/opt/") or
+      String.starts_with?(dep, "/usr/local/Cellar/") or
+      String.starts_with?(dep, "/Users/") or
       (String.starts_with?(dep, "@executable_path") and
          not File.exists?(
            Path.join(
@@ -436,23 +439,19 @@ defmodule Desktop.Deployment.Package.MacOS do
   end
 
   def notarize(
-        %Package{identifier: identifier},
+        %Package{identifier: _identifier},
         %NtzCreds{username: username, password: password, team_uid: team_uid},
         file
       )
       when is_binary(username) and is_binary(password) and is_binary(team_uid) do
     cmd!("xcrun", [
-      "altool",
-      "--notarize-app",
-      "--primary-bundle-id",
-      identifier <> ".dmg",
-      "--username",
+      "notarytool",
+      "--apple-id",
       username,
       "--password",
       password,
-      "--team",
+      "--team-id",
       team_uid,
-      "--file",
       file
     ])
   end

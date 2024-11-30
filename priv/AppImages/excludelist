@@ -35,9 +35,9 @@ libstdc++.so.6
 # Workaround for:
 # usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.21' not found
 
-libGL.so.1
+# libGL.so.1
 # The above may be missing on Chrome OS, https://www.reddit.com/r/Crostini/comments/d1lp67/ultimaker_cura_no_longer_running_as_an_appimage/
-libEGL.so.1
+# libEGL.so.1
 # Part of the video driver (OpenGL); present on any regular
 # desktop system, may also be provided by proprietary drivers.
 # Known to cause issues if it's bundled.
@@ -47,12 +47,12 @@ libGLX.so.0
 # reported to be superfluent and conflicting system libraries (graphics driver)
 # see https://github.com/linuxdeploy/linuxdeploy/issues/89
 
-libOpenGL.so.0
+# libOpenGL.so.0
 # Qt installed via install-qt.sh apparently links to this library
 # part of OpenGL like libGL/libEGL, so excluding it should not cause any problems
 # https://github.com/linuxdeploy/linuxdeploy/issues/152
 
-libdrm.so.2
+# libdrm.so.2
 # Workaround for:
 # Antergos Linux release 2015.11 (ISO-Rolling)
 # /usr/lib/libdrm_amdgpu.so.1: error: symbol lookup error: undefined symbol: drmGetNodeTypeFromFd (fatal)
@@ -60,11 +60,11 @@ libdrm.so.2
 # libGL error: failed to load driver: swrast
 # Unrecognized OpenGL version
 
-libglapi.so.0
+# libglapi.so.0
 # Part of mesa
 # known to cause problems with graphics, see https://github.com/RPCS3/rpcs3/issues/4427#issuecomment-381674910
 
-libgbm.so.1
+# libgbm.so.1
 # Part of mesa
 # https://github.com/probonopd/linuxdeployqt/issues/390#issuecomment-529036305
 
@@ -169,7 +169,7 @@ libICE.so.6
 # libpcre.so.3 # Missing on Fedora 24, SLED 12 SP1, and openSUSE Leap 42.2
 # libroken.so.18 # Mission on openSUSE LEAP 42.0
 # libsasl2.so.2 # Seemingly needed when running Ubuntu 14.04 binaries on Fedora 23
-libSM.so.6
+# libSM.so.6 # Doesn't come with Ubuntu 24.04 by default
 libusb-1.0.so.0
 libuuid.so.1
 # libwind.so.0 # Missing on openSUSE LEAP 42.0

@@ -215,11 +215,15 @@ defmodule Desktop.Deployment.Package do
 
     File.rm(out_file)
 
+
+    File.cp!(pkg.icon, Path.join(rel_path, Path.basename(pkg.icon)))
+
     content = eval_eex(Path.join(linux_tools, "install.eex"), rel, pkg)
     File.write!(Path.join(rel_path, "install"), content)
     File.chmod!(Path.join(rel_path, "install"), 0o755)
 
-    run_content = eval_eex(Path.join(linux_tools, "run.eex"), rel, pkg)
+    ld_library_path = find_ld_library_paths(pkg, rel)
+    run_content = eval_eex(Path.join(linux_tools, "run.eex"), rel, pkg, [ld_library_path: ld_library_path])
     File.write!(Path.join(rel_path, pkg.name), run_content)
     File.chmod!(Path.join(rel_path, pkg.name), 0o755)
 
@@ -341,5 +345,24 @@ defmodule Desktop.Deployment.Package do
         "#{filename}.tmp"
       ]
     )
+  end
+
+  defp find_ld_library_paths(pkg, rel) do
+    priv_dir = priv(pkg)
+    base = "$RELEASE_ROOT/lib/#{pkg.app_name}-#{rel.version}/priv/"
+
+    folders =
+      priv_dir
+    |> Path.join("**")
+    |> Path.expand()
+    |> Path.wildcard()
+    |> Enum.filter(&File.dir?/1)
+    |> Enum.map(fn path ->
+      path = Path.relative_to(path, priv_dir)
+      Path.join(base, path)
+    end)
+
+    folders = [base | folders]
+    Enum.join(folders, ":")
   end
 end
